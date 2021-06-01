@@ -1,0 +1,54 @@
+app:
+  upload:
+    path: images
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      
+  profiles:
+    active: develop
+      
+---   
+server:
+  port: 8081
+
+spring:
+  config:
+    activate:
+      on-profile: develop
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/btlshop_db?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+       
+---
+server:
+  port: 5000
+
+spring:
+  config:
+    activate:
+      on-profile: production
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    
+  datasource:
+    url: jdbc:mysql://uuvqkiws6yxarsmc:3djsCuhsr1eXsmczRrya@bgf4gnrzlfcond46tvft-mysql.services.clever-cloud.com:3306/bgf4gnrzlfcond46tvft
+    username: uuvqkiws6yxarsmc
+    password: 3djsCuhsr1eXsmczRrya
+    driver-class-name: com.mysql.cj.jdbc.Driver

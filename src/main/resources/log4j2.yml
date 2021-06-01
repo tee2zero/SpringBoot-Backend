@@ -1,0 +1,67 @@
+Configutation:
+  monitorInterval: 60
+
+  Properties:
+    Property:
+      - name: dir
+        value: log
+      - name: file-name
+        value: application.log
+      - name: console-pattern
+        value: "%highlight{[%-5p]} %d %c{1} > %m%n%ex{short}"
+      - name: file-pattern
+        value: "[%-5p] %d %c{1} > %m%n%ex{short}"
+
+  Appenders:
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${console-pattern}
+
+    RollingRandomAccessFile:
+      name: RollingRandomAccessFile_Appender
+      fileName: '${dir}/${file-name}'
+      filePattern: "${dir}/${file-name}-%d{MM-dd-yy}.log.gz"
+      immediateFlush: false
+      PatternLayout:
+        pattern: ${file-pattern}
+
+      Policies:
+        TimeBasedTriggeringPolicy:
+          interval: 7
+        SizeBasedTriggeringPolicy:
+          size: 10 MB
+
+      DefaultRolloverStrategy:
+        Delete:
+          basePath: ${dir}
+          maxDepth: 2
+          IfFileName:
+            glob: "*/${file-name}*log.gz"
+          IfLastModified:
+            age: 7D
+
+  Loggers:
+    AsyncRoot:
+      includeLocation: false
+      level: warn
+      AppenderRef:
+        - ref: Console_Appender
+        - ref: RollingRandomAccessFile_Appender
+
+    AsyncLogger:
+      - name: com.bedtaletshop.springbootbackend
+        additivity: false
+        level: debug
+        includeLocation: false
+        AppenderRef:
+          - ref: Console_Appender
+          - ref: RollingRandomAccessFile_Appender
+
+      - name: org.hibernate.engine.internal.StatisticalLoggingSessionEventListener
+        level: info
+        additivity: false
+        AppenderRef:
+          - ref: Console_Appender
+          - ref: RollingRandomAccessFile_Appender
