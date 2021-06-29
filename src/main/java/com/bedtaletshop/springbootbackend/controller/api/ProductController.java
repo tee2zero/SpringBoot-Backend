@@ -62,7 +62,7 @@ public class ProductController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public ResponseEntity<Product> addProduct(@Valid ProductRequest productReq, BindingResult bindingResult) {
+	public ResponseEntity<Product> addProduct(@Valid ProductRequest productReq, BindingResult bindingResult) throws Exception {
 
 		if (bindingResult.hasErrors()) {
 			bindingResult.getFieldErrors().stream().forEach(fileError -> {

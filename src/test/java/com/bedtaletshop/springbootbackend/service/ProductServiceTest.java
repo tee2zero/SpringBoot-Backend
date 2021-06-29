@@ -44,7 +44,7 @@ class ProductServiceTest {
 
         productTest = new Product();
         productTest.setId(1L);
-        productTest.setName("abc");
+        productTest.setName("abcs");
 
     }
 

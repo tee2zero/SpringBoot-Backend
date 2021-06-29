@@ -54,8 +54,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	@Transactional
-	public Product createProduct(ProductRequest product) {
+	@Transactional(rollbackOn = Exception.class)
+	public Product createProduct(ProductRequest product) throws Exception{
 
 		String filename = stroageService.store(product.getImage());
 		log.debug("filename upload:{}", filename);
