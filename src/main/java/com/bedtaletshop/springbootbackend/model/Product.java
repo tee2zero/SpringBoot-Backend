@@ -18,11 +18,19 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Getter
 @Setter
+
+//@SequenceGenerator(name = "products_seq")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	// Recommend this way better gen id with SequenceGenerator
+//	@Id
+//	@GeneratedValue(generator = "products_seq")
+//	private long id;
+
 
 	@Column(length = 200, nullable = false, unique = false)
 	private String name;

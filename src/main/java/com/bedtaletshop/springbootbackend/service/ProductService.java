@@ -13,7 +13,7 @@ public interface ProductService {
 
 	public List<Product> getProduct(String name);
 
-	public Product createProduct(ProductRequest product);
+	public Product createProduct(ProductRequest product) throws Exception;
 
 	public Product editProduct(ProductRequest product, Long id);
 

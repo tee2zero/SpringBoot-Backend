@@ -3,6 +3,8 @@ package com.bedtaletshop.springbootbackend.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.bedtaletshop.springbootbackend.model.SubCategory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 	private final StroageService stroageService;
 	private final SubCategoryService subCategoryService;
 
-	@Override
+    @Override
 	public List<Product> getAllProduct() {
 		return productRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
 	}
@@ -52,6 +54,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public Product createProduct(ProductRequest product) {
 
 		String filename = stroageService.store(product.getImage());

@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 @Data
 @Embeddable
+// This way need to cannot gen auto id need to do yourself
 public class OrderId implements Serializable {
 
 

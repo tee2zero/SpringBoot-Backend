@@ -21,6 +21,16 @@ public class OrderDetailHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private UUID id;
+
+//    @Id
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "uuid2")
+//    @Column(name = "PR_KEY")
+//    private String prKey;
+
     private Integer quantity;
     @Setter(AccessLevel.NONE)
     @CreationTimestamp
